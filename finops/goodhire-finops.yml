@@ -1,0 +1,84 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: GoodHire
+providerId: goodhire
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Background Checks
+- Employment Screening
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of GoodHire spend. GoodHire is billed per completed background check
+  by screening package (product bundle) - there is no separate API subscription
+  fee, so cost tracks the number and type of reports ordered through the API. The
+  dominant cost driver is package selection (Basic $29.99, Essential $59.99,
+  Complete $94.99 per check on the public preset tiers) plus any add-on screenings
+  (employment/education verification, references, MVR, drug testing, etc.).
+  Sandbox usage is free. As part of Checkr, high-volume and Partner API pricing is
+  negotiated.
+notes: >-
+  Per-unit prices are from the public pricing page and are subject to change;
+  reconcile via the product bundles endpoint at order time. Add-ons and
+  verifications carry incremental per-report cost.
+sources:
+- https://www.goodhire.com/pricing/
+- https://www.goodhire.com/api/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: GoodHire
+serviceCategory: Background Screening and Compliance
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: GoodHire Background Checks
+  ServiceCategory: Background Screening and Compliance
+  ProviderName: GoodHire
+  PublisherName: GoodHire
+  InvoiceIssuerName: GoodHire
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: reports_ordered
+  description: Completed background check reports ordered, billed per check by package.
+  unit: reports
+  aggregation: sum
+  dimensions:
+  - company
+  - requestor
+  - productBundle
+- name: addon_screenings
+  description: Incremental add-on screenings (verifications, references, MVR, drug testing) applied to reports.
+  unit: screenings
+  aggregation: sum
+  dimensions:
+  - company
+  - requestor
+  - screeningType
+principles:
+- name: Visibility
+  description: Track reports ordered per company, requestor, and package so background-check spend is attributable to teams and hiring workflows.
+- name: Allocation
+  description: Use requestors and billing codes (request option) to map report spend to internal cost centers and roles.
+- name: Optimization
+  description: Match the package to the role's risk profile rather than defaulting to Complete; add screenings only where required by policy or law.
+- name: Accountability
+  description: Assign owners per requestor/department and review monthly report volume and add-on spend against hiring budgets.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

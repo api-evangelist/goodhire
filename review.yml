@@ -1,0 +1,104 @@
+aid: goodhire
+name: GoodHire
+review:
+  question: Does GoodHire expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-03'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. GoodHire's public API surface is
+    request/response REST over HTTPS (base https://api.goodhire.com, sandbox
+    https://api-sandbox.goodhire.com). Its only server-push mechanism is
+    outbound HTTP webhooks that notify a subscriber URL when a background
+    report changes status - there is no WebSocket, and no client-facing
+    subscribe/stream channel on GoodHire's own API to model. Webhooks are
+    server-to-endpoint HTTP callbacks, out of scope for a WebSocket-focused
+    AsyncAPI document under the current review scope.
+findings:
+  summary: |
+    GoodHire does not publish a documented public WebSocket API. GoodHire is an
+    FCRA-compliant employment background check platform for SMBs, acquired by
+    Checkr in 2021 and now branded "GoodHire, A Checkr Company." Its API is a
+    RESTful, request/response HTTPS API split into a Customer API (a single
+    company ordering its own reports) and a Partner API (HR platforms ordering
+    on behalf of employer customers). The base URL is https://api.goodhire.com
+    (production) and https://api-sandbox.goodhire.com (sandbox), authenticated
+    with an API key sent in the Authorization header as "ApiKey <KEY>". Keys are
+    gated: developers request access from api@goodhire.com and build against the
+    sandbox, which returns dummy data. Real-time status is delivered via outbound
+    HTTP webhooks, not a WebSocket. No realtime, bidirectional, or streaming
+    WebSocket (ws:// or wss://) endpoint is documented anywhere on GoodHire's API.
+  accessModel: |
+    Documentation is public (goodhire.com/api and help.goodhire.com/docs), but
+    API key issuance is gated through api@goodhire.com. The API is therefore a
+    real, documented, partner/customer-gated REST API rather than a fully
+    self-service public API. Some endpoint paths in this catalog are confirmed
+    from the docs; others are honestly modeled from documented resource patterns
+    because the full reference could not be crawled directly at review time
+    (help.goodhire.com was not resolvable from the review environment).
+  acquisition: |
+    Checkr acquired Inflection - whose flagship brand is GoodHire - in 2021 in
+    what was, at the time, Checkr's largest acquisition (reported at roughly
+    $400M by the Wall Street Journal). GoodHire continues to operate under its
+    own brand and API, targeting the SMB segment, while Checkr targets larger
+    and developer-first customers. Some GoodHire workflows may be routed through
+    Checkr infrastructure over time, but GoodHire's own API remains documented
+    and branded separately as of the review date.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.goodhire.com
+      documented: true
+      note: Production Customer and Partner API. Sandbox base is https://api-sandbox.goodhire.com and returns dummy report data.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Outbound HTTP callbacks that notify a subscriber URL on report status changes. Server-to-endpoint HTTP, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in GoodHire's API reference or developer materials as of the review date.
+  endpointsConfirmedRest:
+    - POST https://api.goodhire.com/company/{company_id}/requestor/{requestor_id}/report/queue
+    - GET  https://api.goodhire.com/company/{company_id}/requestor/{requestor_id}/report/{report_id}
+    - GET  https://api.goodhire.com/company/{company_id}/requestor/{requestor_id}/productbundles
+    - POST https://api.goodhire.com/company/{company_id}/requestor/{requestor_id}/partnerappaccess/stepselectreport
+  endpointsModeled:
+    - GET  https://api.goodhire.com/company/{company_id}/requestor/{requestor_id}/report
+    - GET  https://api.goodhire.com/company/{company_id}/requestors
+    - POST https://api.goodhire.com/company/{company_id}/requestors
+    - GET  https://api.goodhire.com/company/{company_id}/requestor/{requestor_id}
+    - Webhook callback POST to the subscriber-configured URL on report status change
+  authentication:
+    scheme: API Key
+    header: 'Authorization: ApiKey <API_KEY>'
+    note: Keys requested from api@goodhire.com; separate sandbox and production keys.
+sources:
+  - url: https://www.goodhire.com/api/
+    type: Documentation
+    note: Background Check API overview - RESTful, SSL, webhook notifications, sandbox, developer dashboard; "GoodHire, A Checkr Company."
+  - url: https://help.goodhire.com/docs/partner-reports
+    type: APIReference
+    note: Reports resource - report/queue create and report/{id} status GET; Partner vs Customer API distinction.
+  - url: https://help.goodhire.com/docs/partner-requestors
+    type: APIReference
+    note: Requestor object - every report is associated with a requestor.
+  - url: https://content.goodhire.com/api-getting-started
+    type: Documentation
+    note: Base URLs (api.goodhire.com prod, api-sandbox.goodhire.com test) and Authorization ApiKey auth; keys via api@goodhire.com.
+  - url: https://www.goodhire.com/pricing/
+    type: Pricing
+    note: Basic $29.99, Essential $59.99, Complete $94.99 per-check packages; 100+ screening options; custom packages under 50 checks/year.
+  - url: https://checkr.com/blog/checkr-acquires-goodhire-inflection
+    type: PressRelease
+    note: Checkr's 2021 acquisition of Inflection/GoodHire, its largest to date (~$400M per WSJ).
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. GoodHire's own public API is
+    request/response REST (Customer and Partner APIs) plus outbound HTTP
+    webhooks for report status changes. No AsyncAPI document was created because
+    there is no client-facing server-push channel (WebSocket or subscribe/stream)
+    on GoodHire's API to model; webhooks are one-way HTTP callbacks.

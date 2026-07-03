@@ -1,0 +1,58 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: GoodHire
+providerId: goodhire
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Background Checks
+- Employment Screening
+- Rate Limiting
+- Quotas
+description: >-
+  GoodHire does not publish fixed numeric rate limits for its API. Because access
+  is gated (API keys issued via api@goodhire.com) and background checks are billed
+  per completed report, throughput in practice is governed by account provisioning
+  and screening volume rather than by a documented per-minute request cap. The
+  sandbox environment (api-sandbox.goodhire.com) returns dummy data for
+  development. Integrations should implement retry-with-backoff, prefer webhook
+  notifications over tight polling of the Reports API, and confirm any account- or
+  partner-specific limits with GoodHire during onboarding.
+notes: >-
+  No numeric per-account or per-endpoint limits are documented as of the review
+  date. Values below are conservative modeling; verify with GoodHire's integration
+  team.
+sources:
+- https://www.goodhire.com/api/
+- https://content.goodhire.com/api-getting-started
+- https://help.goodhire.com/docs/partner-reports
+responseCodes:
+  throttled: 429
+limits:
+- name: API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented; confirm during onboarding.
+- name: Report Ordering
+  scope: account
+  metric: reports
+  limit: account-provisioned
+  notes: Effective throughput is governed by account provisioning and per-check billing, not a published rate cap.
+- name: Sandbox Usage
+  scope: account
+  metric: requests
+  limit: development-only
+  notes: api-sandbox.goodhire.com returns dummy report data for building integrations.
+policies:
+- name: Prefer Webhooks
+  description: Use webhook notifications for report status changes instead of tight polling of the Reports API.
+- name: Backoff Strategy
+  description: Implement exponential backoff with jitter and honor Retry-After on any 429 responses.
+- name: Onboarding Confirmation
+  description: Confirm account- or partner-specific throughput limits with GoodHire's integration team during API key provisioning.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

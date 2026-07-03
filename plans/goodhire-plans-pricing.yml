@@ -1,0 +1,132 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: GoodHire
+providerId: goodhire
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Background Checks
+- Employment Screening
+- Pricing
+- Packages
+- Plans
+description: >-
+  GoodHire prices background checks per completed report by screening package
+  (product bundle), not by API call. There is no separate API subscription fee -
+  API access is gated (request a key from api@goodhire.com) and you pay for the
+  reports you order. GoodHire publishes three preset per-check packages for
+  employers running 50+ checks/year, with 100+ add-on screening options; employers
+  running fewer than 50 checks/year get custom packages. Prices below are from the
+  public pricing page and are subject to change - reconcile at order time via the
+  product bundles endpoint, which returns the packages and prices available to an
+  account.
+notes: >-
+  Sandbox usage (api-sandbox.goodhire.com) returns dummy data and is free while
+  building. Enterprise/high-volume and Partner API pricing is negotiated. Verify
+  current package prices at goodhire.com/pricing and via GET productbundles.
+sources:
+- https://www.goodhire.com/pricing/
+- https://www.goodhire.com/api/
+- https://content.goodhire.com/api-getting-started
+plans:
+- id: goodhire-basic
+  name: Basic
+  type: paid
+  description: >-
+    Entry per-check package covering SSN trace, sex offender registry search,
+    global watchlist search, and national criminal search.
+  entries:
+  - label: Per Background Check
+    name: basic_per_check
+    type: usage
+    metric: reports
+    limit: -1
+    timeFrame: month
+    geo: us
+    unit: 1
+    price: $29.99 per check
+    userMultiplied: false
+  elements:
+  - name: SSN Trace
+  - name: Sex Offender Registry Search
+  - name: Global Watchlist Search
+  - name: National Criminal Search
+- id: goodhire-essential
+  name: Essential
+  type: paid
+  description: >-
+    Mid-tier per-check package adding identity verification and unlimited county
+    criminal search on top of the Basic screenings.
+  entries:
+  - label: Per Background Check
+    name: essential_per_check
+    type: usage
+    metric: reports
+    limit: -1
+    timeFrame: month
+    geo: us
+    unit: 1
+    price: $59.99 per check
+    userMultiplied: false
+  elements:
+  - name: Identity Verification
+  - name: SSN Trace
+  - name: Sex Offender Registry Search
+  - name: Global Watchlist Search
+  - name: National Criminal Search
+  - name: Unlimited County Criminal Search
+- id: goodhire-complete
+  name: Complete
+  type: paid
+  description: >-
+    Top preset per-check package adding unlimited state criminal search and federal
+    criminal search on top of the Essential screenings.
+  entries:
+  - label: Per Background Check
+    name: complete_per_check
+    type: usage
+    metric: reports
+    limit: -1
+    timeFrame: month
+    geo: us
+    unit: 1
+    price: $94.99 per check
+    userMultiplied: false
+  elements:
+  - name: Identity Verification
+  - name: SSN Trace
+  - name: Sex Offender Registry Search
+  - name: Global Watchlist Search
+  - name: National Criminal Search
+  - name: Unlimited County Criminal Search
+  - name: Unlimited State Criminal Search
+  - name: Federal Criminal Search
+- id: goodhire-custom
+  name: Custom / Add-Ons
+  type: enterprise
+  description: >-
+    Custom packages for employers running fewer than 50 checks/year, plus 100+
+    add-on screening options (employment and education verification, professional
+    references, MVR/driving records, drug testing, international, and more) that
+    can be added to any package. Partner API and high-volume pricing negotiated.
+  entries:
+  - label: Custom Package / Add-Ons
+    name: custom_addons
+    type: usage
+    metric: reports
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: varies by screening and volume (contact GoodHire)
+    userMultiplied: false
+  elements:
+  - name: 100+ Add-On Screenings
+  - name: Employment and Education Verification
+  - name: Professional References
+  - name: Volume and Partner Pricing
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

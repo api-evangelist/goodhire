@@ -1,0 +1,142 @@
+aid: goodhire
+url: https://raw.githubusercontent.com/api-evangelist/goodhire/refs/heads/main/apis.yml
+name: GoodHire
+kind: company
+description: GoodHire is an FCRA-compliant employment background check platform aimed
+  at small and midsize businesses, offering criminal, identity, employment, education,
+  and reference screening with candidate self-consent workflows. GoodHire was acquired
+  by Checkr (the developer-first background check company) in 2021 - the deal was
+  reported at roughly $400M - and now operates as "GoodHire, A Checkr Company." The
+  GoodHire API is a RESTful, FCRA-compliant background screening API split into a
+  Customer API (a single company ordering its own reports) and a Partner API (HR
+  platforms that let their employer customers order GoodHire reports). Background
+  checks are ordered by creating a report object tied to a candidate and a package;
+  status changes are delivered via webhooks. API keys are gated - developers request
+  access from api@goodhire.com and build against a sandbox before production.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Background Checks
+- Employment Screening
+- Identity Verification
+- HR
+- Compliance
+- FCRA
+- Checkr
+created: '2026-07-03'
+modified: '2026-07-03'
+specificationVersion: '0.19'
+apis:
+- aid: goodhire:goodhire-reports-api
+  name: GoodHire Reports API
+  tags:
+  - Reports
+  - Screenings
+  - Background Checks
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.goodhire.com/api/
+  baseURL: https://api.goodhire.com
+  properties:
+  - url: https://www.goodhire.com/api/
+    type: Documentation
+  - url: https://help.goodhire.com/docs/partner-reports
+    type: APIReference
+  - url: openapi/goodhire-openapi.yml
+    type: OpenAPI
+  description: Order and track background check reports. A report is created against
+    a candidate and a screening package/product bundle, then queued for processing;
+    the report resource is polled or received via webhook for status and results.
+    Confirmed operations include queuing a report and retrieving a report's status
+    by ID; additional report operations are honestly modeled from documented patterns.
+- aid: goodhire:goodhire-requestors-api
+  name: GoodHire Requestors API
+  tags:
+  - Requestors
+  - Users
+  - Accounts
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://help.goodhire.com/docs/partner-requestors
+  baseURL: https://api.goodhire.com
+  properties:
+  - url: https://help.goodhire.com/docs/partner-requestors
+    type: APIReference
+  - url: openapi/goodhire-openapi.yml
+    type: OpenAPI
+  description: Manage requestor objects - the users within a company who order and
+    are associated with background reports. Every report in the GoodHire API is tied
+    to a requestor, so requestor provisioning is a prerequisite for ordering reports,
+    especially in the Partner API where a platform manages many employer requestors.
+- aid: goodhire:goodhire-packages-api
+  name: GoodHire Packages API
+  tags:
+  - Packages
+  - Product Bundles
+  - Pricing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.goodhire.com/pricing/
+  baseURL: https://api.goodhire.com
+  properties:
+  - url: https://www.goodhire.com/api/
+    type: Documentation
+  - url: openapi/goodhire-openapi.yml
+    type: OpenAPI
+  - url: plans/goodhire-plans-pricing.yml
+    type: Plans
+  description: Retrieve the screening packages (product bundles) available to an account
+    along with their prices, so an integration can present the correct package and
+    per-check cost before ordering a report. Confirmed via the product bundles listing
+    operation scoped to a company and requestor.
+- aid: goodhire:goodhire-webhooks-api
+  name: GoodHire Webhooks API
+  tags:
+  - Webhooks
+  - Notifications
+  - Events
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.goodhire.com/api/
+  baseURL: https://api.goodhire.com
+  properties:
+  - url: https://www.goodhire.com/api/
+    type: Documentation
+  - url: openapi/goodhire-openapi.yml
+    type: OpenAPI
+  description: Receive real-time status updates as a background report moves through
+    its lifecycle (queued, pending candidate consent, in progress, complete, or
+    requiring action). GoodHire documents webhook notifications as the recommended
+    way to avoid polling the Reports API; the callback payload shape is honestly
+    modeled here.
+- aid: goodhire:goodhire-partner-api
+  name: GoodHire Partner API
+  tags:
+  - Partner
+  - Embedded
+  - HR Platforms
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://help.goodhire.com/docs/partner-reports
+  baseURL: https://api.goodhire.com
+  properties:
+  - url: https://help.goodhire.com/docs/partner-reports
+    type: APIReference
+  - url: openapi/goodhire-openapi.yml
+    type: OpenAPI
+  description: The Partner API surface for HR platforms that let their employer
+    customers order GoodHire reports, including the partner app access flow used to
+    select and configure a report on behalf of an embedded requestor. Distinct from
+    the Customer API, which a single company uses to order its own reports directly.
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/goodhire
+- type: Website
+  url: https://www.goodhire.com/
+- type: Documentation
+  url: https://www.goodhire.com/api/
+- type: Pricing
+  url: https://www.goodhire.com/pricing/
+- type: Plans
+  url: plans/goodhire-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/goodhire-rate-limits.yml
+- type: FinOps
+  url: finops/goodhire-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
