@@ -123,6 +123,10 @@ apis:
     select and configure a report on behalf of an embedded requestor. Distinct from
     the Customer API, which a single company uses to order its own reports directly.
 common:
+- type: DomainSecurity
+  url: security/goodhire-domain-security.yml
+- type: Authentication
+  url: authentication/goodhire-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/goodhire
 - type: Website
