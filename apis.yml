@@ -123,6 +123,8 @@ apis:
     select and configure a report on behalf of an embedded requestor. Distinct from
     the Customer API, which a single company uses to order its own reports directly.
 common:
+- type: AgenticAccess
+  url: agentic-access/goodhire-agentic-access.yml
 - type: DomainSecurity
   url: security/goodhire-domain-security.yml
 - type: Authentication

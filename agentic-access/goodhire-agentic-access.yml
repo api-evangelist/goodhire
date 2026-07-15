@@ -1,0 +1,114 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/goodhire-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 8
+  by_action_class:
+    acting: 3
+    connected: 5
+  by_consequence:
+    write: 3
+    read: 5
+  human_in_the_loop_required: 0
+operations:
+- path: /company/{company_id}/requestor/{requestor_id}/report/queue
+  method: post
+  operationId: queueReport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /company/{company_id}/requestor/{requestor_id}/report/{report_id}
+  method: get
+  operationId: getReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /company/{company_id}/requestor/{requestor_id}/report
+  method: get
+  operationId: listReports
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /company/{company_id}/requestor/{requestor_id}/productbundles
+  method: get
+  operationId: listProductBundles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /company/{company_id}/requestors
+  method: get
+  operationId: listRequestors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /company/{company_id}/requestors
+  method: post
+  operationId: createRequestor
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /company/{company_id}/requestor/{requestor_id}
+  method: get
+  operationId: getRequestor
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /company/{company_id}/requestor/{requestor_id}/partnerappaccess/stepselectreport
+  method: post
+  operationId: partnerSelectReport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
