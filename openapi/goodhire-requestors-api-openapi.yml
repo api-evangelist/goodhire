@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: GoodHire Packages Requestors API
+  version: '1.0'
+  x-endpointsModeled: true
+  description: 'RESTful, FCRA-compliant employment background check API for GoodHire (a Checkr company). Background checks are ordered by creating a report object tied to a candidate and a screening package (product bundle); status changes are delivered via outbound webhooks. The API is split into a Customer API (a single company ordering its own reports) and a Partner API (HR platforms ordering on behalf of embedded employer requestors).
+
+
+    Access is gated - request an API key from api@goodhire.com and build against the sandbox (https://api-sandbox.goodhire.com), which returns dummy report data, before moving to production.
+
+
+    NOTE: This document mixes endpoints confirmed from GoodHire''s public docs with endpoints and schemas honestly modeled from documented resource patterns (x-endpointsModeled: true). It is a discovery aid, not a byte-for-byte mirror of GoodHire''s official reference.'
+  contact:
+    name: GoodHire API Team
+    email: api@goodhire.com
+    url: https://www.goodhire.com/api/
+servers:
+- url: https://api.goodhire.com
+  description: Production
+- url: https://api-sandbox.goodhire.com
+  description: Sandbox (returns dummy report data)
+security:
+- ApiKeyAuth: []
+tags:
+- name: Requestors
+  description: Manage the users who order and are associated with reports.
+paths:
+  /company/{company_id}/requestors:
+    get:
+      tags:
+      - Requestors
+      summary: List requestors
+      description: List requestors for a company. Endpoint modeled from documented resource patterns (x-endpointsModeled).
+      operationId: listRequestors
+      x-endpointModeled: true
+      parameters:
+      - $ref: '#/components/parameters/CompanyId'
+      responses:
+        '200':
+          description: A page of requestors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Requestor'
+    post:
+      tags:
+      - Requestors
+      summary: Create a requestor
+      description: Provision a new requestor. Endpoint modeled from documented resource patterns (x-endpointsModeled).
+      operationId: createRequestor
+      x-endpointModeled: true
+      parameters:
+      - $ref: '#/components/parameters/CompanyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Requestor'
+      responses:
+        '200':
+          description: Requestor created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Requestor'
+  /company/{company_id}/requestor/{requestor_id}:
+    get:
+      tags:
+      - Requestors
+      summary: Get a requestor
+      description: Retrieve a single requestor. Endpoint modeled from documented resource patterns (x-endpointsModeled).
+      operationId: getRequestor
+      x-endpointModeled: true
+      parameters:
+      - $ref: '#/components/parameters/CompanyId'
+      - $ref: '#/components/parameters/RequestorId'
+      responses:
+        '200':
+          description: Requestor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Requestor'
+components:
+  parameters:
+    RequestorId:
+      name: requestor_id
+      in: path
+      required: true
+      schema:
+        type: string
+    CompanyId:
+      name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    Requestor:
+      type: object
+      description: A user who orders and is associated with reports.
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key sent as: Authorization: ApiKey <API_KEY>. Request keys from api@goodhire.com.'

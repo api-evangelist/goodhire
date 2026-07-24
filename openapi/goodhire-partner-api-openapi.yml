@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: GoodHire Packages Partner API
+  version: '1.0'
+  x-endpointsModeled: true
+  description: 'RESTful, FCRA-compliant employment background check API for GoodHire (a Checkr company). Background checks are ordered by creating a report object tied to a candidate and a screening package (product bundle); status changes are delivered via outbound webhooks. The API is split into a Customer API (a single company ordering its own reports) and a Partner API (HR platforms ordering on behalf of embedded employer requestors).
+
+
+    Access is gated - request an API key from api@goodhire.com and build against the sandbox (https://api-sandbox.goodhire.com), which returns dummy report data, before moving to production.
+
+
+    NOTE: This document mixes endpoints confirmed from GoodHire''s public docs with endpoints and schemas honestly modeled from documented resource patterns (x-endpointsModeled: true). It is a discovery aid, not a byte-for-byte mirror of GoodHire''s official reference.'
+  contact:
+    name: GoodHire API Team
+    email: api@goodhire.com
+    url: https://www.goodhire.com/api/
+servers:
+- url: https://api.goodhire.com
+  description: Production
+- url: https://api-sandbox.goodhire.com
+  description: Sandbox (returns dummy report data)
+security:
+- ApiKeyAuth: []
+tags:
+- name: Partner
+  description: Partner API app-access flow for embedded HR platforms.
+paths:
+  /company/{company_id}/requestor/{requestor_id}/partnerappaccess/stepselectreport:
+    post:
+      tags:
+      - Partner
+      summary: Partner app access - select report step
+      description: Partner API flow step used by an embedded HR platform to select and configure the report to be ordered on behalf of a requestor, with request options customizing portions of the request. Confirmed endpoint.
+      operationId: partnerSelectReport
+      parameters:
+      - $ref: '#/components/parameters/CompanyId'
+      - $ref: '#/components/parameters/RequestorId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartnerReportSelection'
+      responses:
+        '200':
+          description: Report selection accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Report:
+      type: object
+      description: A background check report. Schema modeled from documented fields.
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum:
+          - queued
+          - pending_candidate
+          - in_progress
+          - complete
+          - action_required
+          - canceled
+        result:
+          type: string
+          description: Overall outcome once complete (e.g. clear or needs review).
+        candidate:
+          $ref: '#/components/schemas/Candidate'
+        productBundleId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    PartnerReportSelection:
+      type: object
+      description: Partner API report selection payload. Schema modeled from documented fields.
+      properties:
+        productBundleId:
+          type: string
+        requestOptions:
+          type: object
+          additionalProperties: true
+    Candidate:
+      type: object
+      description: The person being screened. Schema modeled from documented fields.
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        ssn:
+          type: string
+          description: Provided when the requestor submits candidate info directly rather than via candidate self-consent.
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    RequestorId:
+      name: requestor_id
+      in: path
+      required: true
+      schema:
+        type: string
+    CompanyId:
+      name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key sent as: Authorization: ApiKey <API_KEY>. Request keys from api@goodhire.com.'
