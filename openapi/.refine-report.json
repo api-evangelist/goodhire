@@ -1,0 +1,20 @@
+{
+  "provider": "goodhire",
+  "sources": [
+    "goodhire-packages-api-openapi.yml",
+    "goodhire-partner-api-openapi.yml",
+    "goodhire-reports-api-openapi.yml",
+    "goodhire-requestors-api-openapi.yml"
+  ],
+  "outputs": [
+    "goodhire-packages-api-openapi.yml",
+    "goodhire-partner-api-openapi.yml",
+    "goodhire-reports-api-openapi.yml",
+    "goodhire-requestors-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
