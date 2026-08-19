@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GoodHire Packages Reports API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Queue a background report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.goodhire.com/company/:company_id/requestor/:requestor_id/report/queue",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "requestor_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create and queue a new background check report for a candidate under a given company and requestor, selecting the screening package and passing candidate details plus request options (e.g. mark all info as submitted, add billing codes, suppress the receipt email). Confirmed endpoint."
+        },
+        {
+          "info": {
+            "name": "Get report status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.goodhire.com/company/:company_id/requestor/:requestor_id/report/:report_id",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "requestor_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the status and available results of a report by ID. Confirmed endpoint."
+        },
+        {
+          "info": {
+            "name": "List reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.goodhire.com/company/:company_id/requestor/:requestor_id/report",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "requestor_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List reports for a requestor. Endpoint modeled from documented resource patterns (x-endpointsModeled)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

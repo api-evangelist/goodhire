@@ -1,0 +1,227 @@
+{
+  "item": [
+    {
+      "id": "5afb1074-2f04-4eac-9b9c-1afd02c5d4e4",
+      "name": "Packages",
+      "description": {
+        "content": "List available screening packages (product bundles) and prices.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f9de9429-4ce3-42e3-ab3b-f6ee3a9f1fbb",
+          "name": "List product bundles (packages)",
+          "request": {
+            "name": "List product bundles (packages)",
+            "description": {
+              "content": "Retrieve all screening packages (product bundles) available to the account along with their prices. Confirmed endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company",
+                ":company_id",
+                "requestor",
+                ":requestor_id",
+                "productbundles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "company_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "requestor_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0aff6aff-9d98-4c6c-995f-b8d28d955ac7",
+              "name": "Available packages",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    ":company_id",
+                    "requestor",
+                    ":requestor_id",
+                    "productbundles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"price\": 4226.6609154787975,\n    \"screenings\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"price\": 8392.609664466043,\n    \"screenings\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1270605-378e-4e94-836d-569ba8c74fb0",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    ":company_id",
+                    "requestor",
+                    ":requestor_id",
+                    "productbundles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.goodhire.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6c7d07ed-13d7-4e6e-bda1-21601ca5aeaa",
+    "name": "GoodHire Packages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful, FCRA-compliant employment background check API for GoodHire (a Checkr company). Background checks are ordered by creating a report object tied to a candidate and a screening package (product bundle); status changes are delivered via outbound webhooks. The API is split into a Customer API (a single company ordering its own reports) and a Partner API (HR platforms ordering on behalf of embedded employer requestors).\n\nAccess is gated - request an API key from api@goodhire.com and build against the sandbox (https://api-sandbox.goodhire.com), which returns dummy report data, before moving to production.\n\nNOTE: This document mixes endpoints confirmed from GoodHire's public docs with endpoints and schemas honestly modeled from documented resource patterns (x-endpointsModeled: true). It is a discovery aid, not a byte-for-byte mirror of GoodHire's official reference.\n\nContact Support:\n Name: GoodHire API Team\n Email: api@goodhire.com",
+      "type": "text/plain"
+    }
+  }
+}

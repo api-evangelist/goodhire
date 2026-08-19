@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GoodHire Packages API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Packages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List product bundles (packages)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.goodhire.com/company/:company_id/requestor/:requestor_id/productbundles",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "requestor_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all screening packages (product bundles) available to the account along with their prices. Confirmed endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

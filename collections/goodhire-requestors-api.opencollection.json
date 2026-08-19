@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GoodHire Packages Requestors API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Requestors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List requestors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.goodhire.com/company/:company_id/requestors",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List requestors for a company. Endpoint modeled from documented resource patterns (x-endpointsModeled)."
+        },
+        {
+          "info": {
+            "name": "Create a requestor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.goodhire.com/company/:company_id/requestors",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provision a new requestor. Endpoint modeled from documented resource patterns (x-endpointsModeled)."
+        },
+        {
+          "info": {
+            "name": "Get a requestor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.goodhire.com/company/:company_id/requestor/:requestor_id",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "requestor_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a single requestor. Endpoint modeled from documented resource patterns (x-endpointsModeled)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

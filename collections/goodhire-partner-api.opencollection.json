@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GoodHire Packages Partner API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partner",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Partner app access - select report step",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.goodhire.com/company/:company_id/requestor/:requestor_id/partnerappaccess/stepselectreport",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "requestor_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partner API flow step used by an embedded HR platform to select and configure the report to be ordered on behalf of a requestor, with request options customizing portions of the request. Confirmed endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

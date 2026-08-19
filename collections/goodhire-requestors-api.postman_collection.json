@@ -1,0 +1,380 @@
+{
+  "item": [
+    {
+      "id": "d6794c83-598d-4ae1-8866-f859b822ea50",
+      "name": "Requestors",
+      "description": {
+        "content": "Manage the users who order and are associated with reports.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bcc150ec-528a-4215-96d7-b33771c9ce7b",
+          "name": "List requestors",
+          "request": {
+            "name": "List requestors",
+            "description": {
+              "content": "List requestors for a company. Endpoint modeled from documented resource patterns (x-endpointsModeled).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company",
+                ":company_id",
+                "requestors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "company_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41c1a95e-d585-45b5-acad-8d9ef7f35eb2",
+              "name": "A page of requestors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    ":company_id",
+                    "requestors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"at4rdwGF@vFoLEUpwadgEyeU.dtf\"\n  },\n  {\n    \"id\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"C6Ro@SkxqjYEOUkinHNYbJyUvNDUaxjoWU.ppu\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e2e3071c-9823-4904-b95f-f09e52b988ca",
+          "name": "Create a requestor",
+          "request": {
+            "name": "Create a requestor",
+            "description": {
+              "content": "Provision a new requestor. Endpoint modeled from documented resource patterns (x-endpointsModeled).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company",
+                ":company_id",
+                "requestors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "company_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a27fe2d5-8947-4aed-a1e7-b7ce5f43c797",
+              "name": "Requestor created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    ":company_id",
+                    "requestors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "947eda51-94c5-460b-8024-731aa03ea6bc",
+          "name": "Get a requestor",
+          "request": {
+            "name": "Get a requestor",
+            "description": {
+              "content": "Retrieve a single requestor. Endpoint modeled from documented resource patterns (x-endpointsModeled).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company",
+                ":company_id",
+                "requestor",
+                ":requestor_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "company_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "requestor_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec632000-3ae1-4db4-ac82-12e7f67e264e",
+              "name": "Requestor",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    ":company_id",
+                    "requestor",
+                    ":requestor_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.goodhire.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "928a4a35-723b-411a-8cc4-ee69f2c6ce10",
+    "name": "GoodHire Packages Requestors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful, FCRA-compliant employment background check API for GoodHire (a Checkr company). Background checks are ordered by creating a report object tied to a candidate and a screening package (product bundle); status changes are delivered via outbound webhooks. The API is split into a Customer API (a single company ordering its own reports) and a Partner API (HR platforms ordering on behalf of embedded employer requestors).\n\nAccess is gated - request an API key from api@goodhire.com and build against the sandbox (https://api-sandbox.goodhire.com), which returns dummy report data, before moving to production.\n\nNOTE: This document mixes endpoints confirmed from GoodHire's public docs with endpoints and schemas honestly modeled from documented resource patterns (x-endpointsModeled: true). It is a discovery aid, not a byte-for-byte mirror of GoodHire's official reference.\n\nContact Support:\n Name: GoodHire API Team\n Email: api@goodhire.com",
+      "type": "text/plain"
+    }
+  }
+}

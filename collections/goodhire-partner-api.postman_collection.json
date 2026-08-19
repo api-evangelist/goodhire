@@ -1,0 +1,259 @@
+{
+  "item": [
+    {
+      "id": "1c0c2ef6-6f48-4eb4-ba6b-7d5fc05cb738",
+      "name": "Partner",
+      "description": {
+        "content": "Partner API app-access flow for embedded HR platforms.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f37c5529-7bae-4443-a723-2c547a1ecd09",
+          "name": "Partner app access - select report step",
+          "request": {
+            "name": "Partner app access - select report step",
+            "description": {
+              "content": "Partner API flow step used by an embedded HR platform to select and configure the report to be ordered on behalf of a requestor, with request options customizing portions of the request. Confirmed endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company",
+                ":company_id",
+                "requestor",
+                ":requestor_id",
+                "partnerappaccess",
+                "stepselectreport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "company_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "requestor_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productBundleId\": \"<string>\",\n  \"requestOptions\": {\n    \"key_0\": 2029,\n    \"key_1\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "596ad59f-f048-431f-a81d-5c3b4ed3589b",
+              "name": "Report selection accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    ":company_id",
+                    "requestor",
+                    ":requestor_id",
+                    "partnerappaccess",
+                    "stepselectreport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productBundleId\": \"<string>\",\n  \"requestOptions\": {\n    \"key_0\": false,\n    \"key_1\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"queued\",\n  \"result\": \"string\",\n  \"candidate\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"CDRdnWWIOHZ@QZPhGhjOUDzHjYokFRwR.xnb\",\n    \"phone\": \"string\",\n    \"ssn\": \"string\"\n  },\n  \"productBundleId\": \"string\",\n  \"createdAt\": \"2024-11-22T23:01:12.593Z\",\n  \"completedAt\": \"2020-03-14T07:11:17.114Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "416b0451-0528-4657-9412-97ec0784cc6d",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    ":company_id",
+                    "requestor",
+                    ":requestor_id",
+                    "partnerappaccess",
+                    "stepselectreport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestor_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productBundleId\": \"<string>\",\n  \"requestOptions\": {\n    \"key_0\": false,\n    \"key_1\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.goodhire.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b4c35162-10bf-43a8-bf28-da457b55df86",
+    "name": "GoodHire Packages Partner API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful, FCRA-compliant employment background check API for GoodHire (a Checkr company). Background checks are ordered by creating a report object tied to a candidate and a screening package (product bundle); status changes are delivered via outbound webhooks. The API is split into a Customer API (a single company ordering its own reports) and a Partner API (HR platforms ordering on behalf of embedded employer requestors).\n\nAccess is gated - request an API key from api@goodhire.com and build against the sandbox (https://api-sandbox.goodhire.com), which returns dummy report data, before moving to production.\n\nNOTE: This document mixes endpoints confirmed from GoodHire's public docs with endpoints and schemas honestly modeled from documented resource patterns (x-endpointsModeled: true). It is a discovery aid, not a byte-for-byte mirror of GoodHire's official reference.\n\nContact Support:\n Name: GoodHire API Team\n Email: api@goodhire.com",
+      "type": "text/plain"
+    }
+  }
+}
