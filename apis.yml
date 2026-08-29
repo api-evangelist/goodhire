@@ -13,6 +13,18 @@ description: GoodHire is an FCRA-compliant employment background check platform 
   checks are ordered by creating a report object tied to a candidate and a package;
   status changes are delivered via webhooks. API keys are gated - developers request
   access from api@goodhire.com and build against a sandbox before production.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
