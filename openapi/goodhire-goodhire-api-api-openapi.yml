@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: GoodHire Partner API
+  title: GoodHire API
   version: '1.0'
   x-endpointsModeled: true
   description: 'RESTful, FCRA-compliant employment background check API for GoodHire (a Checkr company). Background checks are ordered by creating a report object tied to a candidate and a screening package (product bundle); status changes are delivered via outbound webhooks. The API is split into a Customer API (a single company ordering its own reports) and a Partner API (HR platforms ordering on behalf of embedded employer requestors).
@@ -22,49 +22,48 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: Partner
-  description: Partner API app-access flow for embedded HR platforms.
-paths:
-  /company/{company_id}/requestor/{requestor_id}/partnerappaccess/stepselectreport:
+- name: GoodHire API
+paths: {}
+webhooks:
+  reportStatusChanged:
     post:
-      tags:
-      - Partner
-      summary: Partner app access - select report step
-      description: Partner API flow step used by an embedded HR platform to select and configure the report to be ordered on behalf of a requestor, with request options customizing portions of the request. Confirmed endpoint.
-      operationId: partnerSelectReport
-      parameters:
-      - $ref: '#/components/parameters/CompanyId'
-      - $ref: '#/components/parameters/RequestorId'
+      summary: Report status changed
+      description: Outbound HTTP callback GoodHire POSTs to the subscriber-configured URL when a report changes status. Payload shape modeled from documented behavior (x-endpointsModeled). This is a one-way HTTP webhook, not a WebSocket.
+      x-endpointModeled: true
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PartnerReportSelection'
+              type: object
+              properties:
+                event:
+                  type: string
+                  example: report.status_changed
+                report:
+                  $ref: '#/components/schemas/Report'
       responses:
         '200':
-          description: Report selection accepted
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Report'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+          description: Acknowledged by the subscriber
+      tags:
+      - GoodHire API
 components:
-  parameters:
-    RequestorId:
-      name: requestor_id
-      in: path
-      required: true
-      schema:
-        type: string
-    CompanyId:
-      name: company_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
+    Candidate:
+      type: object
+      description: The person being screened. Schema modeled from documented fields.
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        ssn:
+          type: string
+          description: Provided when the requestor submits candidate info directly rather than via candidate self-consent.
     Report:
       type: object
       description: A background check report. Schema modeled from documented fields.
@@ -93,45 +92,6 @@ components:
         completedAt:
           type: string
           format: date-time
-    Candidate:
-      type: object
-      description: The person being screened. Schema modeled from documented fields.
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        ssn:
-          type: string
-          description: Provided when the requestor submits candidate info directly rather than via candidate self-consent.
-    PartnerReportSelection:
-      type: object
-      description: Partner API report selection payload. Schema modeled from documented fields.
-      properties:
-        productBundleId:
-          type: string
-        requestOptions:
-          type: object
-          additionalProperties: true
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

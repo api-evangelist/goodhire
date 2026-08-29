@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: GoodHire Packages Reports API
+  title: GoodHire Reports API
   version: '1.0'
   x-endpointsModeled: true
   description: 'RESTful, FCRA-compliant employment background check API for GoodHire (a Checkr company). Background checks are ordered by creating a report object tied to a candidate and a screening package (product bundle); status changes are delivered via outbound webhooks. The API is split into a Customer API (a single company ordering its own reports) and a Partner API (HR platforms ordering on behalf of embedded employer requestors).
@@ -99,6 +99,19 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    RequestorId:
+      name: requestor_id
+      in: path
+      required: true
+      schema:
+        type: string
+    CompanyId:
+      name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
     Report:
       type: object
@@ -128,6 +141,22 @@ components:
         completedAt:
           type: string
           format: date-time
+    Candidate:
+      type: object
+      description: The person being screened. Schema modeled from documented fields.
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        ssn:
+          type: string
+          description: Provided when the requestor submits candidate info directly rather than via candidate self-consent.
     ReportOrder:
       type: object
       description: Request body for queuing a report. Schema modeled from documented fields.
@@ -151,22 +180,6 @@ components:
           type: string
         message:
           type: string
-    Candidate:
-      type: object
-      description: The person being screened. Schema modeled from documented fields.
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        ssn:
-          type: string
-          description: Provided when the requestor submits candidate info directly rather than via candidate self-consent.
   responses:
     Unauthorized:
       description: Missing or invalid API key
@@ -174,19 +187,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    RequestorId:
-      name: requestor_id
-      in: path
-      required: true
-      schema:
-        type: string
-    CompanyId:
-      name: company_id
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

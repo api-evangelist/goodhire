@@ -123,6 +123,16 @@ apis:
     url: https://help.goodhire.com/docs/partner-requestors
   - type: Plans
     url: plans/goodhire-plans-pricing.yml
+- aid: goodhire:goodhire-goodhire-api-api
+  name: GoodHire GoodHire API
+  description: The GoodHire API API from GoodHire — 0 operation(s) for goodhire api.
+  humanURL: https://www.goodhire.com/api/
+  baseURL: https://api.goodhire.com
+  tags:
+  - GoodHire API
+  properties:
+  - type: OpenAPI
+    url: openapi/goodhire-goodhire-api-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/goodhire-agentic-access.yml
