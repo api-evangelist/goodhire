@@ -2,17 +2,15 @@ aid: goodhire
 url: https://raw.githubusercontent.com/api-evangelist/goodhire/refs/heads/main/apis.yml
 name: GoodHire
 kind: company
-description: GoodHire is an FCRA-compliant employment background check platform aimed
-  at small and midsize businesses, offering criminal, identity, employment, education,
-  and reference screening with candidate self-consent workflows. GoodHire was acquired
-  by Checkr (the developer-first background check company) in 2021 - the deal was
-  reported at roughly $400M - and now operates as "GoodHire, A Checkr Company." The
-  GoodHire API is a RESTful, FCRA-compliant background screening API split into a
-  Customer API (a single company ordering its own reports) and a Partner API (HR
-  platforms that let their employer customers order GoodHire reports). Background
-  checks are ordered by creating a report object tied to a candidate and a package;
-  status changes are delivered via webhooks. API keys are gated - developers request
-  access from api@goodhire.com and build against a sandbox before production.
+description: GoodHire is an FCRA-compliant employment background check platform aimed at small and midsize
+  businesses, offering criminal, identity, employment, education, and reference screening with candidate
+  self-consent workflows. GoodHire was acquired by Checkr (the developer-first background check company)
+  in 2021 - the deal was reported at roughly $400M - and now operates as "GoodHire, A Checkr Company."
+  The GoodHire API is a RESTful, FCRA-compliant background screening API split into a Customer API (a
+  single company ordering its own reports) and a Partner API (HR platforms that let their employer customers
+  order GoodHire reports). Background checks are ordered by creating a report object tied to a candidate
+  and a package; status changes are delivered via webhooks. API keys are gated - developers request access
+  from api@goodhire.com and build against a sandbox before production.
 deliveryModel:
   model: saas
   open_source: false
@@ -49,7 +47,7 @@ tags:
 - FCRA
 - Checkr
 created: '2026-07-03'
-modified: '2026-07-03'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: goodhire:goodhire-packages-api
@@ -125,7 +123,7 @@ apis:
   - type: Plans
     url: plans/goodhire-plans-pricing.yml
 - aid: goodhire:goodhire-goodhire-api-api
-  name: GoodHire GoodHire API
+  name: GoodHire API
   description: The GoodHire API API from GoodHire — 0 operation(s) for goodhire api.
   humanURL: https://www.goodhire.com/api/
   baseURL: https://api.goodhire.com
