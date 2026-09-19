@@ -42,6 +42,14 @@ tags:
 - Background Checks
 - Employment Screening
 - Identity Verification
+- Human Resources
+- Compliance
+- FCRA
+- Checkr
+tags_raw:
+- Background Checks
+- Employment Screening
+- Identity Verification
 - HR
 - Compliance
 - FCRA
@@ -74,6 +82,8 @@ apis:
   humanURL: https://www.goodhire.com/api/
   baseURL: https://api.goodhire.com
   tags:
+  - Partners
+  tags_raw:
   - Partner
   properties:
   - type: OpenAPI
