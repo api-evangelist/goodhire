@@ -17,9 +17,11 @@
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "goodhire-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "goodhire-openapi.yml: tagged webhooks POST reportStatusChanged -> GoodHire API",
-    "goodhire-openapi.yml: declared missing tag: GoodHire API"
+    "goodhire-openapi.yml: declared missing tag: GoodHire API",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
+    "goodhire-goodhire-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "goodhire-packages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "goodhire-partner-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "goodhire-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",

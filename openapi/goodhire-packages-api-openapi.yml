@@ -3,13 +3,7 @@ info:
   title: GoodHire Packages API
   version: '1.0'
   x-endpointsModeled: true
-  description: 'RESTful, FCRA-compliant employment background check API for GoodHire (a Checkr company). Background checks are ordered by creating a report object tied to a candidate and a screening package (product bundle); status changes are delivered via outbound webhooks. The API is split into a Customer API (a single company ordering its own reports) and a Partner API (HR platforms ordering on behalf of embedded employer requestors).
-
-
-    Access is gated - request an API key from api@goodhire.com and build against the sandbox (https://api-sandbox.goodhire.com), which returns dummy report data, before moving to production.
-
-
-    NOTE: This document mixes endpoints confirmed from GoodHire''s public docs with endpoints and schemas honestly modeled from documented resource patterns (x-endpointsModeled: true). It is a discovery aid, not a byte-for-byte mirror of GoodHire''s official reference.'
+  description: RESTful, FCRA-compliant employment background check API for GoodHire (a Checkr company).
   contact:
     name: GoodHire API Team
     email: api@goodhire.com
@@ -48,19 +42,26 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    RequestorId:
-      name: requestor_id
-      in: path
-      required: true
-      schema:
-        type: string
     CompanyId:
       name: company_id
       in: path
       required: true
       schema:
         type: string
+    RequestorId:
+      name: requestor_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     ProductBundle:
       type: object
       description: A screening package available to the account, with price.
@@ -76,13 +77,6 @@ components:
           type: array
           items:
             type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
   responses:
     Unauthorized:
       description: Missing or invalid API key
