@@ -94,38 +94,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Candidate:
-      type: object
-      description: The person being screened. Schema modeled from documented fields.
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        ssn:
-          type: string
-          description: Provided when the requestor submits candidate info directly rather than via candidate self-consent.
-    ReportOrder:
-      type: object
-      description: Request body for queuing a report. Schema modeled from documented fields.
-      required:
-      - candidate
-      - productBundleId
-      properties:
-        candidate:
-          $ref: '#/components/schemas/Candidate'
-        productBundleId:
-          type: string
-          description: Identifier of the screening package to run.
-        requestOptions:
-          type: object
-          description: Options such as allInfoSubmitted, billingCode, or suppressReceiptEmail.
-          additionalProperties: true
     Report:
       type: object
       description: A background check report. Schema modeled from documented fields.
@@ -154,6 +122,22 @@ components:
         completedAt:
           type: string
           format: date-time
+    Candidate:
+      type: object
+      description: The person being screened. Schema modeled from documented fields.
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        ssn:
+          type: string
+          description: Provided when the requestor submits candidate info directly rather than via candidate self-consent.
     Error:
       type: object
       properties:
@@ -161,6 +145,22 @@ components:
           type: string
         message:
           type: string
+    ReportOrder:
+      type: object
+      description: Request body for queuing a report. Schema modeled from documented fields.
+      required:
+      - candidate
+      - productBundleId
+      properties:
+        candidate:
+          $ref: '#/components/schemas/Candidate'
+        productBundleId:
+          type: string
+          description: Identifier of the screening package to run.
+        requestOptions:
+          type: object
+          description: Options such as allInfoSubmitted, billingCode, or suppressReceiptEmail.
+          additionalProperties: true
   parameters:
     CompanyId:
       name: company_id
