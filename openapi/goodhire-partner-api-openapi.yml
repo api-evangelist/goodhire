@@ -45,6 +45,13 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Report:
       type: object
@@ -74,6 +81,15 @@ components:
         completedAt:
           type: string
           format: date-time
+    PartnerReportSelection:
+      type: object
+      description: Partner API report selection payload. Schema modeled from documented fields.
+      properties:
+        productBundleId:
+          type: string
+        requestOptions:
+          type: object
+          additionalProperties: true
     Candidate:
       type: object
       description: The person being screened. Schema modeled from documented fields.
@@ -90,15 +106,6 @@ components:
         ssn:
           type: string
           description: Provided when the requestor submits candidate info directly rather than via candidate self-consent.
-    PartnerReportSelection:
-      type: object
-      description: Partner API report selection payload. Schema modeled from documented fields.
-      properties:
-        productBundleId:
-          type: string
-        requestOptions:
-          type: object
-          additionalProperties: true
     Error:
       type: object
       properties:
@@ -119,13 +126,6 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
