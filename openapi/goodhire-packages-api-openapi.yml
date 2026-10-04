@@ -41,6 +41,19 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    CompanyId:
+      name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+    RequestorId:
+      name: requestor_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
     ProductBundle:
       type: object
@@ -71,19 +84,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    CompanyId:
-      name: company_id
-      in: path
-      required: true
-      schema:
-        type: string
-    RequestorId:
-      name: requestor_id
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
