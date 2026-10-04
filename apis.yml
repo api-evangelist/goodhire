@@ -143,6 +143,9 @@ apis:
   - type: OpenAPI
     url: openapi/goodhire-goodhire-api-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/goodhire-capability-edges.yml
+  name: GoodHire Business Capability Map
 - type: AgenticAccess
   url: agentic-access/goodhire-agentic-access.yml
 - type: DomainSecurity
