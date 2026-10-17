@@ -46,22 +46,15 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Candidate:
+    PartnerReportSelection:
       type: object
-      description: The person being screened. Schema modeled from documented fields.
+      description: Partner API report selection payload. Schema modeled from documented fields.
       properties:
-        firstName:
+        productBundleId:
           type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        ssn:
-          type: string
-          description: Provided when the requestor submits candidate info directly rather than via candidate self-consent.
+        requestOptions:
+          type: object
+          additionalProperties: true
     Report:
       type: object
       description: A background check report. Schema modeled from documented fields.
@@ -90,6 +83,22 @@ components:
         completedAt:
           type: string
           format: date-time
+    Candidate:
+      type: object
+      description: The person being screened. Schema modeled from documented fields.
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        ssn:
+          type: string
+          description: Provided when the requestor submits candidate info directly rather than via candidate self-consent.
     Error:
       type: object
       properties:
@@ -97,24 +106,15 @@ components:
           type: string
         message:
           type: string
-    PartnerReportSelection:
-      type: object
-      description: Partner API report selection payload. Schema modeled from documented fields.
-      properties:
-        productBundleId:
-          type: string
-        requestOptions:
-          type: object
-          additionalProperties: true
   parameters:
-    CompanyId:
-      name: company_id
+    RequestorId:
+      name: requestor_id
       in: path
       required: true
       schema:
         type: string
-    RequestorId:
-      name: requestor_id
+    CompanyId:
+      name: company_id
       in: path
       required: true
       schema:

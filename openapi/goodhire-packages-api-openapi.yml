@@ -42,19 +42,33 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    CompanyId:
-      name: company_id
-      in: path
-      required: true
-      schema:
-        type: string
     RequestorId:
       name: requestor_id
       in: path
       required: true
       schema:
         type: string
+    CompanyId:
+      name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     ProductBundle:
       type: object
       description: A screening package available to the account, with price.
@@ -70,20 +84,6 @@ components:
           type: array
           items:
             type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

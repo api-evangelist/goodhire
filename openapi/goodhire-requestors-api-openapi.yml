@@ -80,14 +80,14 @@ paths:
                 $ref: '#/components/schemas/Requestor'
 components:
   parameters:
-    RequestorId:
-      name: requestor_id
+    CompanyId:
+      name: company_id
       in: path
       required: true
       schema:
         type: string
-    CompanyId:
-      name: company_id
+    RequestorId:
+      name: requestor_id
       in: path
       required: true
       schema:

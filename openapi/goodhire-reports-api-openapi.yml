@@ -93,23 +93,20 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    RequestorId:
+      name: requestor_id
+      in: path
+      required: true
+      schema:
+        type: string
+    CompanyId:
+      name: company_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    Candidate:
-      type: object
-      description: The person being screened. Schema modeled from documented fields.
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        ssn:
-          type: string
-          description: Provided when the requestor submits candidate info directly rather than via candidate self-consent.
     Report:
       type: object
       description: A background check report. Schema modeled from documented fields.
@@ -154,6 +151,22 @@ components:
           type: object
           description: Options such as allInfoSubmitted, billingCode, or suppressReceiptEmail.
           additionalProperties: true
+    Candidate:
+      type: object
+      description: The person being screened. Schema modeled from documented fields.
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        ssn:
+          type: string
+          description: Provided when the requestor submits candidate info directly rather than via candidate self-consent.
     Error:
       type: object
       properties:
@@ -161,19 +174,6 @@ components:
           type: string
         message:
           type: string
-  parameters:
-    CompanyId:
-      name: company_id
-      in: path
-      required: true
-      schema:
-        type: string
-    RequestorId:
-      name: requestor_id
-      in: path
-      required: true
-      schema:
-        type: string
   responses:
     Unauthorized:
       description: Missing or invalid API key
