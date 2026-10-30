@@ -1,4 +1,4 @@
-# GoodHire (goodhire)
+# GoodHire
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,98 +64,124 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-GoodHire is an FCRA-compliant employment background check platform aimed at small and midsize businesses, offering criminal, identity, employment, education, and reference screening with candidate self-consent workflows. GoodHire was acquired by **Checkr** (the developer-first background check company) in **2021** - the deal, part of Checkr's acquisition of GoodHire's parent Inflection, was reported at roughly **$400M** and was Checkr's largest to date - and now operates as "GoodHire, A Checkr Company." GoodHire continues under its own brand and API, focused on the SMB segment, while Checkr targets larger and developer-first customers.
+GoodHire is an FCRA-compliant employment background check platform aimed at small and midsize businesses, offering criminal, identity, employment, education, and reference screening with candidate self-consent workflows. GoodHire was acquired by Checkr (the developer-first background check company) in 2021 - the deal was reported at roughly $400M - and now operates as "GoodHire, A Checkr Company." The GoodHire API is a RESTful, FCRA-compliant background screening API split into a Customer API (a single company ordering its own reports) and a Partner API (HR platforms that let their employer customers order GoodHire reports). Background checks are ordered by creating a report object tied to a candidate and a package; status changes are delivered via webhooks. API keys are gated - developers request access from api@goodhire.com and build against a sandbox before production.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/goodhire/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/goodhire/refs/heads/main/apis.yml)
+**Areas:** Background Checks · Employment Screening · Identity Verification · Human Resources · Compliance · FCRA · Checkr
 
-## Access Model
+## GoodHire on APIs.io
 
-GoodHire exposes a **real, documented RESTful API**, but it is **gated**, not fully self-service:
+Everything profiled for GoodHire is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/goodhire/](https://apis.io/providers/goodhire/)** — or go straight to one of the APIs or properties below.
 
-- **Documentation is public** at [goodhire.com/api](https://www.goodhire.com/api/) and the help center docs.
-- **API keys are issued on request** - developers contact **api@goodhire.com** to obtain a key.
-- **Two API flavors:** a **Customer API** (a single company ordering its own reports) and a **Partner API** (HR platforms that let their employer customers order GoodHire reports through an embedded flow).
-- **Base URLs:** `https://api.goodhire.com` (production) and `https://api-sandbox.goodhire.com` (sandbox, which returns dummy report data for building integrations).
-- **Authentication:** API key sent in the `Authorization` header as `ApiKey <API_KEY>`.
-- **Real-time updates:** delivered via outbound **HTTP webhooks** on report status changes - there is **no public WebSocket API**.
+### APIs (5)
 
-Background checks are ordered by creating a **report** object tied to a **candidate** and a **screening package (product bundle)**; every report is associated with a **requestor** (the user running it).
+- [GoodHire Packages API](https://apis.io/apis/goodhire/goodhire-packages-api/) — List available screening packages (product bundles) and prices.
+- [GoodHire Partner API](https://apis.io/apis/goodhire/goodhire-partner-api/) — Partner API app-access flow for embedded HR platforms.
+- [GoodHire Reports API](https://apis.io/apis/goodhire/goodhire-reports-api/) — Order and track background check reports.
+- [GoodHire Requestors API](https://apis.io/apis/goodhire/goodhire-requestors-api/) — Manage the users who order and are associated with reports.
+- [GoodHire API](https://apis.io/apis/goodhire/goodhire-goodhire-api-api/) — The GoodHire API API from GoodHire — 0 operation(s) for goodhire api.
 
-> **Modeling note:** Some endpoint paths and schemas in this catalog are **confirmed** from GoodHire's public docs (report queue/status, product bundles, partner app access). Others are **honestly modeled** (`x-endpointsModeled`) from documented resource patterns because the full reference could not be crawled directly at build time. Treat the OpenAPI as a discovery aid, not a byte-for-byte mirror.
+### Published properties
 
-## Tags
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- Background Checks
-- Employment Screening
-- Identity Verification
-- HR
-- Compliance
-- FCRA
-- Checkr
+#### Agentic access (1)
 
-## Timestamps
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Created:** 2026-07-03
-- **Modified:** 2026-07-03
+- [Goodhire Agentic Access](https://apis.io/agentic-access/goodhire/goodhire-agentic-access/)
 
-## APIs
+#### Collections (4)
 
-### GoodHire Reports API
+Postman and Open Collection request collections.
 
-Order and track background check reports. A report is created against a candidate and a screening package, then queued for processing; status and results are polled or received via webhook. Confirmed operations: queue a report and get a report by ID.
+- [GoodHire Packages API](https://apis.io/collections/goodhire/open-goodhire-packages-api/)
+- [GoodHire Packages Partner API](https://apis.io/collections/goodhire/open-goodhire-partner-api/)
+- [GoodHire Packages Reports API](https://apis.io/collections/goodhire/open-goodhire-reports-api/)
+- [GoodHire Packages Requestors API](https://apis.io/collections/goodhire/open-goodhire-requestors-api/)
 
-- **Human URL:** [https://www.goodhire.com/api/](https://www.goodhire.com/api/)
-- **Base URL:** `https://api.goodhire.com`
-- Confirmed: `POST /company/{company_id}/requestor/{requestor_id}/report/queue`, `GET /company/{company_id}/requestor/{requestor_id}/report/{report_id}`
+#### Security (2)
 
-### GoodHire Requestors API
+Authentication, trust centre, and vulnerability disclosure.
 
-Manage requestor objects - the users within a company who order and are associated with reports. Requestor provisioning is a prerequisite for ordering reports, especially in the Partner API.
+- [Goodhire Authentication](https://apis.io/security/goodhire/goodhire-authentication/)
+- [Goodhire Domain Security](https://apis.io/security/goodhire/goodhire-domain-security/)
 
-- **Human URL:** [https://help.goodhire.com/docs/partner-requestors](https://help.goodhire.com/docs/partner-requestors)
-- **Base URL:** `https://api.goodhire.com`
+#### Plans and pricing (1)
 
-### GoodHire Packages API
+Published plans, tiers and prices.
 
-Retrieve the screening packages (product bundles) available to an account along with their prices, so an integration can present the right package and per-check cost before ordering. Confirmed: `GET /company/{company_id}/requestor/{requestor_id}/productbundles`.
+- [Goodhire Plans Pricing](https://apis.io/plans/goodhire/goodhire-plans-pricing/)
 
-- **Human URL:** [https://www.goodhire.com/pricing/](https://www.goodhire.com/pricing/)
-- **Base URL:** `https://api.goodhire.com`
+#### Rate limits (1)
 
-### GoodHire Webhooks API
+Published request limits.
 
-Receive real-time status updates as a report moves through its lifecycle (queued, pending candidate consent, in progress, complete, action required). Outbound HTTP callbacks, not a WebSocket.
+- [Goodhire Rate Limits](https://apis.io/rate-limits/goodhire/goodhire-rate-limits/)
 
-- **Human URL:** [https://www.goodhire.com/api/](https://www.goodhire.com/api/)
-- **Base URL:** `https://api.goodhire.com`
+#### FinOps (1)
 
-### GoodHire Partner API
+What the API costs to run, by operation.
 
-The Partner API surface for HR platforms that let their employer customers order GoodHire reports, including the partner app-access flow used to select and configure a report for an embedded requestor. Confirmed: `POST /company/{company_id}/requestor/{requestor_id}/partnerappaccess/stepselectreport`.
+- [Goodhire Finops](https://apis.io/finops/goodhire/goodhire-finops/)
 
-- **Human URL:** [https://help.goodhire.com/docs/partner-reports](https://help.goodhire.com/docs/partner-reports)
-- **Base URL:** `https://api.goodhire.com`
+## Where to find this API
 
-## Pricing (per completed check)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-GoodHire bills per report by package, not per API call. Public preset tiers (employers running 50+ checks/year; subject to change):
-
-- **Basic** - $29.99: SSN Trace, Sex Offender Registry, Global Watchlist, National Criminal Search
-- **Essential** - $59.99: adds Identity Verification and Unlimited County Criminal Search
-- **Complete** - $94.99: adds Unlimited State Criminal Search and Federal Criminal Search
-- **Custom / Add-Ons** - 100+ add-on screenings (employment/education verification, references, MVR, drug testing, international); custom packages for employers under 50 checks/year.
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/goodhire)
 - [Website](https://www.goodhire.com/)
 - [Documentation](https://www.goodhire.com/api/)
 - [Pricing](https://www.goodhire.com/pricing/)
-- [Plans](plans/goodhire-plans-pricing.yml)
-- [Rate Limits](rate-limits/goodhire-rate-limits.yml)
-- [Fin Ops](finops/goodhire-finops.yml)
+- [Blog](https://www.goodhire.com/blog/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 46.4 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 27.4 |
+| Access clarity | 18.4 |
+
+**Agent readiness 22.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Employment & Payroll
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/goodhire/](https://apis.io/providers/goodhire/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for GoodHire: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/goodhire/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
